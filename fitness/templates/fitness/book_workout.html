@@ -1,0 +1,32 @@
+{% extends 'fitness/base.html' %}
+
+{% block title %}Запись на тренировку - Фитнес-клуб{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title mb-4">Запись на тренировку</h2>
+                
+                <div class="mb-4">
+                    <h5>Информация о тренировке:</h5>
+                    <p><strong>Тип тренировки:</strong> {{ schedule.workout_type.name }}</p>
+                    <p><strong>Дата:</strong> {{ schedule.date }}</p>
+                    <p><strong>Время:</strong> {{ schedule.time }}</p>
+                    <p><strong>Тренер:</strong> {{ schedule.trainer.name }}</p>
+                    <p><strong>Свободных мест:</strong> {{ schedule.max_participants|add:"-"|add:schedule.current_participants|stringformat:"i" }}</p>
+                </div>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Подтвердить запись</button>
+                        <a href="{% url 'fitness:schedule_list' %}" class="btn btn-secondary">Вернуться к расписанию</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

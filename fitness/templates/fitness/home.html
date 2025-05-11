@@ -1,0 +1,55 @@
+{% extends 'fitness/base.html' %}
+
+{% block title %}Главная - Фитнес-клуб{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="text-center mb-4">Добро пожаловать в наш фитнес-клуб!</h1>
+        <p class="lead text-center">Запишитесь на тренировку прямо сейчас</p>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6">
+        <h2>Наши тренеры</h2>
+        <div class="row">
+            {% for trainer in trainers %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ trainer.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ trainer.specialization }}</h6>
+                        <p class="card-text">{{ trainer.description }}</p>
+                        <p class="card-text"><small class="text-muted">Опыт: {{ trainer.experience }} лет</small></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <h2>Типы тренировок</h2>
+        <div class="row">
+            {% for workout in workout_types %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ workout.name }}</h5>
+                        <p class="card-text">{{ workout.description }}</p>
+                        <p class="card-text"><small class="text-muted">Длительность: {{ workout.duration }} минут</small></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12 text-center">
+        <a href="{% url 'fitness:schedule_list' %}" class="btn btn-primary btn-lg">Посмотреть расписание</a>
+    </div>
+</div>
+{% endblock %} 
